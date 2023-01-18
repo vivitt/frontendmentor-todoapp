@@ -1,10 +1,18 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from "vue-router";
+import { ref } from "vue";
+import Task from "./components/Task.vue";
 
 interface ITask {
+  id: number;
   task: string;
   status: string;
 }
+
+const tasks = ref<ITask[]>([]);
+
+const addTodo = <ITask>(todo) => {
+  tasks.push(todo);
+};
 </script>
 
 <template>
@@ -18,20 +26,16 @@ interface ITask {
   </header>
   <main>
     <div class="main__input">
-      <input type="text" />
+      <form @submit="addTodo">
+        <input type="text" placeholder="Create a new todo..." />
+      </form>
     </div>
     <div class="main__list">
       <ul>
-        <li>
-          <div class="main__list--task">
-            <input type="checkbox" />
-            <p>task</p>
-            <button>X</button>
-          </div>
-        </li>
+        <Task v-for="task in tasks" :props="task" />
       </ul>
       <div>
-        <p>5 items left</p>
+        <p>{{ tasks.length }} items left</p>
         <span><a>All</a><a>Active</a><a>Completed</a></span>
         <a>Clear Completed</a>
       </div>
