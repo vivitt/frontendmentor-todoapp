@@ -33,34 +33,40 @@ const filterTasks = computed((filter: string) => {
 </script>
 
 <template>
-  <header>
-    <ListHeader />
-  </header>
-  <main>
-    <div class="main__input">
-      <form @submit.prevent="addTodo">
-        <input
-          type="text"
-          placeholder="Create a new todo..."
-          v-model="newTodo"
-        />
-      </form>
-    </div>
-    <div class="main__list">
-      <ul>
-        <Task v-for="task in filteredTasks" :props="task" />
-      </ul>
-      <div>
-        <ListMenu />
+  <div class="app">
+    <header>
+      <ListHeader />
+    </header>
+    <main>
+      <div class="main__input">
+        <form @submit.prevent="addTodo">
+          <input
+            type="text"
+            placeholder="Create a new todo..."
+            v-model="newTodo"
+          />
+        </form>
       </div>
-    </div>
-  </main>
-  <footer>
-    <Attribution />
-  </footer>
+      <div class="main__list">
+        <ul>
+          <Task v-for="task in filteredTasks" :props="task" />
+        </ul>
+        <div>
+          <ListMenu />
+        </div>
+      </div>
+    </main>
+    <footer>
+      <Attribution />
+    </footer>
+  </div>
 </template>
 
 <style scoped>
+.app {
+  max-width: 40%;
+  margin: auto;
+}
 footer {
   position: absolute;
   bottom: 0;

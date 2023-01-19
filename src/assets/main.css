@@ -24,4 +24,9 @@ a {
 }
 
 @media (min-width: 499px) {
+  body {
+    background-image: url("./images/bg-desktop-dark.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
 }
