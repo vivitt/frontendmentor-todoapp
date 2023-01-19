@@ -4,26 +4,24 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-
-  font-weight: normal;
 }
 
-a,
-.green {
+a {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
+  color: var(--vt-c-text-dark-2);
   transition: 0.4s;
 }
 
 @media (hover: hover) {
   a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+    color: hsl(236, 33%, 92%);
+  }
+}
+@media (active: active) {
+  a:active {
+    color: var(--vt-c-brigth-blue);
   }
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
+@media (min-width: 499px) {
 }

@@ -1,33 +1,40 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import Task from "./components/Task.vue";
 import { useListStore } from "./stores/list";
+import ListHeader from "./components/ListHeader.vue";
 import { storeToRefs } from "pinia";
 import ListMenu from "./components/ListMenu.vue";
 import Attribution from "./components/Attribution.vue";
-const store = useListStore();
-const { list } = storeToRefs(store);
-let newTodo = ref<string>("");
 
+const listStore = useListStore();
+
+const { list } = storeToRefs(listStore);
+
+let filteredTasks = ref(list);
+let newTodo = ref<string>("");
+let filter = ref<string>("");
 const addTodo = () => {
-  store.addTask({
+  listStore.addTask({
     task: newTodo.value,
     id: Date.now(),
     status: "active",
   });
-
   newTodo.value = "";
 };
+
+const filterTasks = computed((filter: string) => {
+  filter === ""
+    ? (filteredTasks.value = list.value)
+    : (filteredTasks.value = list.value.filter((t) => {
+        t.status === filter;
+      }));
+});
 </script>
 
 <template>
   <header>
-    <div class="header">
-      <h1 class="header__title">TODO</h1>
-      <div class="header__button">
-        <button>swicht mode</button>
-      </div>
-    </div>
+    <ListHeader />
   </header>
   <main>
     <div class="main__input">
@@ -41,7 +48,7 @@ const addTodo = () => {
     </div>
     <div class="main__list">
       <ul>
-        <Task v-for="task in list" :props="task" />
+        <Task v-for="task in filteredTasks" :props="task" />
       </ul>
       <div>
         <ListMenu />
