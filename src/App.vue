@@ -8,10 +8,17 @@ interface ITask {
   status: string;
 }
 
-const tasks = ref<ITask[]>([]);
+let newTodo = ref<string>("");
+let tasks = ref<ITask[]>([]);
+let leftTask = ref<number>(0);
+const addTodo = () => {
+  tasks.value.push({
+    task: newTodo.value,
+    id: tasks.value.length + 1,
+    status: "active",
+  });
 
-const addTodo = <ITask>(todo) => {
-  tasks.push(todo);
+  newTodo.value = "";
 };
 </script>
 
@@ -26,8 +33,12 @@ const addTodo = <ITask>(todo) => {
   </header>
   <main>
     <div class="main__input">
-      <form @submit="addTodo">
-        <input type="text" placeholder="Create a new todo..." />
+      <form @submit.prevent="addTodo">
+        <input
+          type="text"
+          placeholder="Create a new todo..."
+          v-model="newTodo"
+        />
       </form>
     </div>
     <div class="main__list">
@@ -35,7 +46,10 @@ const addTodo = <ITask>(todo) => {
         <Task v-for="task in tasks" :props="task" />
       </ul>
       <div>
-        <p>{{ tasks.length }} items left</p>
+        <p>
+          {{ tasks.filter((task) => task.status === "active").length }}
+          items left
+        </p>
         <span><a>All</a><a>Active</a><a>Completed</a></span>
         <a>Clear Completed</a>
       </div>

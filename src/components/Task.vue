@@ -10,11 +10,20 @@ defineProps<{ props: Props }>();
 </script>
 <template>
   <li key="props.id">
-    <div class="main__list--task">
-      <input type="checkbox" />
+    <div class="task">
+      <label class="checkbox__container">
+        <input
+          type="checkbox"
+          @change="
+            props.status === 'active'
+              ? (props.status = 'done')
+              : (props.status = 'active')
+          "
+        />
+        <span class="checkmark"></span>
+      </label>
       <div>
-        <p>{{ props.task }}</p>
-        <p>{{ props.status }}</p>
+        <p>{{ props.task }} - {{ props.status }}</p>
       </div>
 
       <button><img src="./icons/icon-cross.svg" /></button>
@@ -22,4 +31,18 @@ defineProps<{ props: Props }>();
   </li>
 </template>
 
-<style scoped></style>
+<style scoped>
+li {
+  list-style: none;
+}
+.task {
+  display: flex;
+  flex-direction: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+}
+button {
+  all: unset;
+  cursor: pointer;
+}
+</style>
