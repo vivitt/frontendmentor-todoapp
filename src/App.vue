@@ -1,20 +1,18 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import Task from "./components/Task.vue";
-
-interface ITask {
-  id: number;
-  task: string;
-  status: string;
-}
-
+import { useListStore } from "./stores/list";
+import { storeToRefs } from "pinia";
+import ListMenu from "./components/ListMenu.vue";
+import Attribution from "./components/Attribution.vue";
+const store = useListStore();
+const { list } = storeToRefs(store);
 let newTodo = ref<string>("");
-let tasks = ref<ITask[]>([]);
-let leftTask = ref<number>(0);
+
 const addTodo = () => {
-  tasks.value.push({
+  store.addTask({
     task: newTodo.value,
-    id: tasks.value.length + 1,
+    id: Date.now(),
     status: "active",
   });
 
@@ -43,26 +41,21 @@ const addTodo = () => {
     </div>
     <div class="main__list">
       <ul>
-        <Task v-for="task in tasks" :props="task" />
+        <Task v-for="task in list" :props="task" />
       </ul>
       <div>
-        <p>
-          {{ tasks.filter((task) => task.status === "active").length }}
-          items left
-        </p>
-        <span><a>All</a><a>Active</a><a>Completed</a></span>
-        <a>Clear Completed</a>
+        <ListMenu />
       </div>
     </div>
   </main>
   <footer>
-    <div class="attribution">
-      Challenge by
-      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
-        >Frontend Mentor</a
-      >. Coded by <a href="#">Your Name Here</a>.
-    </div>
+    <Attribution />
   </footer>
 </template>
 
-<style scoped></style>
+<style scoped>
+footer {
+  position: absolute;
+  bottom: 0;
+}
+</style>

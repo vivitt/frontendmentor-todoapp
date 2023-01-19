@@ -6,7 +6,11 @@ interface Props {
 }
 </script>
 <script setup lang="ts">
+import type { Store } from "pinia";
+import { useListStore } from "../stores/list";
+const store = useListStore();
 defineProps<{ props: Props }>();
+const remove = (task: Props) => store.removeTask(task);
 </script>
 <template>
   <li key="props.id">
@@ -22,11 +26,13 @@ defineProps<{ props: Props }>();
         />
         <span class="checkmark"></span>
       </label>
-      <div>
-        <p>{{ props.task }} - {{ props.status }}</p>
+      <div :class="props.status === 'active' ? '' : 'done'">
+        <p>{{ props.task }} - {{ props.status }} {{ props.id }}</p>
       </div>
 
-      <button><img src="./icons/icon-cross.svg" /></button>
+      <button @click="remove(props)">
+        <img src="./icons/icon-cross.svg" />
+      </button>
     </div>
   </li>
 </template>
@@ -40,6 +46,11 @@ li {
   flex-direction: row nowrap;
   justify-content: space-around;
   align-items: center;
+  color: white;
+}
+.done {
+  color: hsl(233, 14%, 35%);
+  text-decoration: line-through;
 }
 button {
   all: unset;
