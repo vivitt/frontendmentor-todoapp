@@ -6,14 +6,12 @@ interface Props {
 }
 </script>
 <script setup lang="ts">
-import { ref } from "vue";
-import type { Store } from "pinia";
 import { useListStore } from "../stores/list";
 const store = useListStore();
+
 defineProps<{ props: Props }>();
 
 const remove = (task: Props) => store.removeTask(task);
-const checked = ref<boolean>(false);
 </script>
 <template>
   <li key="props.id">

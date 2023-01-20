@@ -20,9 +20,11 @@ const clearCompleted = () => {
       </p>
     </span>
     <span class="bottom__menu">
-      <a @click="">All</a>
-      <a @click="">Active</a><a @click="">Completed</a></span
+      <a @click="$emit('filterParam', 'all')">All</a>
+      <a @click="$emit('filterParam', 'active')">Active</a
+      ><a @click="$emit('filterParam', 'done')">Completed</a></span
     >
+
     <span>
       <button @click="clearCompleted">
         <a>Clear Completed</a>
@@ -37,10 +39,11 @@ const clearCompleted = () => {
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
+  font-size: 0.8rem;
 }
 
 .bottom__menu a {
-  padding: 0 1rem;
+  padding: 0 0.5rem;
   cursor: pointer;
 }
 button {

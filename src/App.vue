@@ -24,18 +24,16 @@ const addTodo = () => {
   newTodo.value = "";
 };
 
-const filteredTasks = computed(() => {
-  console.log(filterParam.filter);
-  if (filterParam.filter === "all") {
-    return [...list.value].filter((task) => task);
+const filteredTasks = computed((filter: string) => {
+  console.log(filter);
+  if (filter === "active") {
+    return [...list.value].filter((task) => task.done === false);
+  } else if (filter === "done") {
+    return [...list.value].filter((task) => task.done === true);
   } else {
-    return [...list.value].filter((task) => task.status === filterParam.filter);
+    return [...list.value].filter((task) => task);
   }
 });
-
-const setFilter = (filter: string) => {
-  filterParam.filter = filter;
-};
 </script>
 
 <template>
@@ -58,13 +56,7 @@ const setFilter = (filter: string) => {
           <Task v-for="task in filteredTasks" :props="task" />
         </ul>
         <div>
-          <span class="bottom__menu">
-            <a @click="setFilter('all')">All</a>
-            <a @click="setFilter('active')">Active</a
-            ><a @click="setFilter('done')">Completed</a></span
-          >
-
-          <ListMenu :filterBy="filterParam" />
+          <ListMenu @filterParam="" />
         </div>
       </div>
     </main>
@@ -76,7 +68,7 @@ const setFilter = (filter: string) => {
 
 <style scoped>
 .app {
-  max-width: 40%;
+  max-width: 60%;
   margin: auto;
 }
 footer {
