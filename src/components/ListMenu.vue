@@ -5,22 +5,23 @@ import type { ITask } from "../stores/list";
 
 const store = useListStore();
 const { list } = storeToRefs(store);
-const clearCompleted = () =>
-  (list.value = list.value.filter((task: ITask) => task.status !== "done"));
+
+const clearCompleted = () => {
+  list.value = list.value.filter((task: ITask) => !task.done);
+};
 </script>
 
 <template>
   <div class="bottom">
     <span>
       <p>
-        {{ list.filter((task: ITask) => task.status === "active").length }}
+        {{ list.filter((task: ITask) => task.done === false).length }}
         items left
       </p>
     </span>
     <span class="bottom__menu">
-      <a @click="props.filter = ''">All</a>
-      <a @click="props.filter = 'active'">Active</a
-      ><a @click="props.filter = 'done'">Completed</a></span
+      <a @click="">All</a>
+      <a @click="">Active</a><a @click="">Completed</a></span
     >
     <span>
       <button @click="clearCompleted">
@@ -40,6 +41,7 @@ const clearCompleted = () =>
 
 .bottom__menu a {
   padding: 0 1rem;
+  cursor: pointer;
 }
 button {
   all: unset;

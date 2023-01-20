@@ -2,32 +2,28 @@
 interface Props {
   id: number;
   task: string;
-  status: string;
+  done: boolean;
 }
 </script>
 <script setup lang="ts">
+import { ref } from "vue";
 import type { Store } from "pinia";
 import { useListStore } from "../stores/list";
 const store = useListStore();
 defineProps<{ props: Props }>();
+
 const remove = (task: Props) => store.removeTask(task);
+const checked = ref<boolean>(false);
 </script>
 <template>
   <li key="props.id">
     <div class="task">
-      <label class="checkbox__container">
-        <input
-          type="checkbox"
-          @change="
-            props.status === 'active'
-              ? (props.status = 'done')
-              : (props.status = 'active')
-          "
-        />
-        <span class="checkmark"></span>
-      </label>
-      <div :class="props.status === 'active' ? '' : 'done'">
-        <p>{{ props.task }} - {{ props.status }} {{ props.id }}</p>
+      <input type="checkbox" id="status" v-model="props.done" />
+
+      <label for="status" hidden> </label>
+
+      <div :class="props.done === false ? '' : 'done'">
+        <p>{{ props.task }} - {{ props.done }} {{ props.id }}</p>
       </div>
 
       <button @click="remove(props)">

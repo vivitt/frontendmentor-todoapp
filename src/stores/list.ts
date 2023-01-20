@@ -4,8 +4,12 @@ import { defineStore } from "pinia";
 export interface ITask {
   id: number;
   task: string;
-  status: string;
+  done: boolean;
 }
+export interface IFilter {
+  filter: string;
+}
+
 export const useListStore = defineStore("list", () => {
   let list = ref<ITask[]>([]);
 

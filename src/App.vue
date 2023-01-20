@@ -1,35 +1,41 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, reactive } from "vue";
 import Task from "./components/Task.vue";
-import { useListStore } from "./stores/list";
+import { useListStore, type ITask } from "./stores/list";
 import ListHeader from "./components/ListHeader.vue";
 import { storeToRefs } from "pinia";
 import ListMenu from "./components/ListMenu.vue";
 import Attribution from "./components/Attribution.vue";
-
+import type { IFilter } from "./stores/list";
 const listStore = useListStore();
 
 const { list } = storeToRefs(listStore);
 
-let filteredTasks = ref(list);
 let newTodo = ref<string>("");
-let filter = ref<string>("");
+
+let filterParam = reactive<IFilter>({ filter: "all" });
+
 const addTodo = () => {
   listStore.addTask({
     task: newTodo.value,
     id: Date.now(),
-    status: "active",
+    done: false,
   });
   newTodo.value = "";
 };
 
-const filterTasks = computed((filter: string) => {
-  filter === ""
-    ? (filteredTasks.value = list.value)
-    : (filteredTasks.value = list.value.filter((t) => {
-        t.status === filter;
-      }));
+const filteredTasks = computed(() => {
+  console.log(filterParam.filter);
+  if (filterParam.filter === "all") {
+    return [...list.value].filter((task) => task);
+  } else {
+    return [...list.value].filter((task) => task.status === filterParam.filter);
+  }
 });
+
+const setFilter = (filter: string) => {
+  filterParam.filter = filter;
+};
 </script>
 
 <template>
@@ -52,7 +58,13 @@ const filterTasks = computed((filter: string) => {
           <Task v-for="task in filteredTasks" :props="task" />
         </ul>
         <div>
-          <ListMenu />
+          <span class="bottom__menu">
+            <a @click="setFilter('all')">All</a>
+            <a @click="setFilter('active')">Active</a
+            ><a @click="setFilter('done')">Completed</a></span
+          >
+
+          <ListMenu :filterBy="filterParam" />
         </div>
       </div>
     </main>
