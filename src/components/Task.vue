@@ -20,7 +20,7 @@ const remove = (task: Props) => store.removeTask(task);
 
       <label for="status" hidden> </label>
 
-      <div :class="props.done === false ? '' : 'done'">
+      <div :class="{ done: props.done }">
         <p>{{ props.task }} - {{ props.done }} {{ props.id }}</p>
       </div>
 

@@ -20,9 +20,9 @@ const clearCompleted = () => {
       </p>
     </span>
     <span class="bottom__menu">
-      <a @click="$emit('filterParam', 'all')">All</a>
-      <a @click="$emit('filterParam', 'active')">Active</a
-      ><a @click="$emit('filterParam', 'done')">Completed</a></span
+      <a @click="$emit('filterTasks', 'all')">All</a>
+      <a @click="$emit('filterTasks', 'active')">Active</a
+      ><a @click="$emit('filterTasks', 'done')">Completed</a></span
     >
 
     <span>

@@ -6,14 +6,12 @@ import ListHeader from "./components/ListHeader.vue";
 import { storeToRefs } from "pinia";
 import ListMenu from "./components/ListMenu.vue";
 import Attribution from "./components/Attribution.vue";
-import type { IFilter } from "./stores/list";
+
 const listStore = useListStore();
 
 const { list } = storeToRefs(listStore);
 
 let newTodo = ref<string>("");
-
-let filterParam = reactive<IFilter>({ filter: "all" });
 
 const addTodo = () => {
   listStore.addTask({
@@ -24,11 +22,14 @@ const addTodo = () => {
   newTodo.value = "";
 };
 
-const filteredTasks = computed((filter: string) => {
-  console.log(filter);
-  if (filter === "active") {
+let filterTaskStatus = ref<string>("all");
+
+const setFilter = (filter: string) => (filterTaskStatus.value = filter);
+
+const filteredTasks = computed(() => {
+  if (filterTaskStatus.value === "active") {
     return [...list.value].filter((task) => task.done === false);
-  } else if (filter === "done") {
+  } else if (filterTaskStatus.value === "done") {
     return [...list.value].filter((task) => task.done === true);
   } else {
     return [...list.value].filter((task) => task);
@@ -56,7 +57,7 @@ const filteredTasks = computed((filter: string) => {
           <Task v-for="task in filteredTasks" :props="task" />
         </ul>
         <div>
-          <ListMenu @filterParam="" />
+          <ListMenu @filter-tasks="setFilter" />
         </div>
       </div>
     </main>
