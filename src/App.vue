@@ -24,16 +24,17 @@ const addTodo = () => {
 
 let filterTaskStatus = ref<string>("all");
 
-const setFilter = (filter: string) => (filterTaskStatus.value = filter);
+const setFilter = (filter: string) => {
+  filterTaskStatus.value = filter;
+};
 
 const filteredTasks = computed(() => {
-  if (filterTaskStatus.value === "active") {
+  if (filterTaskStatus.value === "Active") {
     return [...list.value].filter((task) => task.done === false);
-  } else if (filterTaskStatus.value === "done") {
+  } else if (filterTaskStatus.value === "Completed") {
     return [...list.value].filter((task) => task.done === true);
-  } else {
-    return [...list.value].filter((task) => task);
   }
+  return [...list.value].filter((task) => task);
 });
 </script>
 

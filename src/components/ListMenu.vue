@@ -1,14 +1,17 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import { useListStore } from "../stores/list";
 import { storeToRefs } from "pinia";
 import type { ITask } from "../stores/list";
 
 const store = useListStore();
 const { list } = storeToRefs(store);
-
+let isActive = ref(0);
 const clearCompleted = () => {
   list.value = list.value.filter((task: ITask) => !task.done);
 };
+
+const filtersForTasksStatus = ["All", "Active", "Completed"];
 </script>
 
 <template>
@@ -20,11 +23,24 @@ const clearCompleted = () => {
       </p>
     </span>
     <span class="bottom__menu">
-      <a @click="$emit('filterTasks', 'all')">All</a>
-      <a @click="$emit('filterTasks', 'active')">Active</a
-      ><a @click="$emit('filterTasks', 'done')">Completed</a></span
-    >
-
+      <ul>
+        <li
+          v-for="filter in filtersForTasksStatus"
+          :key="filtersForTasksStatus.indexOf(filter)"
+        >
+          <a
+            @click="
+              $emit('filterTasks', filter);
+              isActive = filtersForTasksStatus.indexOf(filter);
+            "
+            :class="{
+              active: isActive === filtersForTasksStatus.indexOf(filter),
+            }"
+            >{{ filter }}</a
+          >
+        </li>
+      </ul>
+    </span>
     <span>
       <button @click="clearCompleted">
         <a>Clear Completed</a>
@@ -42,6 +58,13 @@ const clearCompleted = () => {
   font-size: 0.8rem;
 }
 
+.bottom__menu ul {
+  display: flex;
+  flex-flow: row nowrap;
+}
+.bottom__menu li {
+  list-style-type: none;
+}
 .bottom__menu a {
   padding: 0 0.5rem;
   cursor: pointer;
@@ -49,5 +72,8 @@ const clearCompleted = () => {
 button {
   all: unset;
   cursor: pointer;
+}
+.active {
+  color: var(--vt-c-brigth-blue);
 }
 </style>
