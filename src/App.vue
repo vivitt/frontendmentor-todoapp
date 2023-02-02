@@ -68,7 +68,7 @@ const filteredTasks = computed(() => {
 .app {
   max-width: 85%;
   margin: auto;
-  min-width: 200px;
+  min-width: 300px;
   main {
     margin: 0 0 25rem 0;
     .main__list {

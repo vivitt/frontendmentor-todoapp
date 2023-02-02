@@ -50,7 +50,7 @@ const filtersForTasksStatus = ["All", "Active", "Completed"];
       }
     }
   }
-  @media (min-width: 499px) {
+  @media (min-width: 520px) {
     display: none;
   }
 }

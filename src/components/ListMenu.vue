@@ -74,7 +74,7 @@ const filtersForTasksStatus = ["All", "Active", "Completed"];
         }
       }
     }
-    @media (max-width: 499px) {
+    @media (max-width: 519px) {
       display: none;
     }
   }
