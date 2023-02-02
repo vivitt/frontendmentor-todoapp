@@ -63,7 +63,7 @@ const addTodo = () => {
       box-sizing: border-box;
       padding-left: 50px;
       height: 3rem;
-
+      color: var(--color-task);
       border-radius: 5px;
     }
   }

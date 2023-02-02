@@ -27,7 +27,7 @@ a {
 
 @media (min-width: 499px) {
   body {
-    background-image: url("./images/bg-desktop-dark.jpg");
+    background-image: var(--bckg-image-desktop);
     background-repeat: no-repeat;
     background-size: contain;
   }
