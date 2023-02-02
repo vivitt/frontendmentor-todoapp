@@ -8,7 +8,11 @@ export const useModeStore = defineStore("mode", () => {
     localStorage.setItem("mode", mode.value);
   };
   const getMode = () => {
-    mode.value = localStorage.getItem("mode") || "dark";
+    let selectedMode = localStorage.getItem("mode");
+    selectedMode === "dark" || selectedMode === ""
+      ? document.documentElement.setAttribute("class", "dark")
+      : document.documentElement.setAttribute("class", "");
+    console.log(mode.value);
   };
 
   return { mode, setMode, getMode };

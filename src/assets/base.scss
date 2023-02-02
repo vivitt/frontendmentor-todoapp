@@ -35,19 +35,17 @@
   --section-gap: 160px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: var(--very-dark-blue);
-    --color-list-background: var(--very-dark-desatured-blue);
-    --color-task: var(--very-light-grayish-blue);
-    --color-completed-task: var(--dark-grayish-blue);
-    --color-menu: var(--dark-grayish-blue);
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
+.dark {
+  --color-background: var(--very-dark-blue);
+  --color-list-background: var(--very-dark-desatured-blue);
+  --color-task: var(--very-light-grayish-blue);
+  --color-completed-task: var(--dark-grayish-blue);
+  --color-menu: var(--dark-grayish-blue);
+  --color-border: var(--vt-c-divider-dark-2);
+  --color-border-hover: var(--vt-c-divider-dark-1);
 
-    --color-heading: var(--vt-c-white);
-    --color-text: var(--vt-c-text-dark-2);
-  }
+  --color-heading: var(--vt-c-white);
+  --color-text: var(--vt-c-text-dark-2);
 }
 
 *,

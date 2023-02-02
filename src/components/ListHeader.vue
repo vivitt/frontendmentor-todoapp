@@ -2,11 +2,11 @@
 import { useModeStore } from "../stores/mode";
 const modeStore = useModeStore();
 const switchMode = () => {
-  modeStore.getMode();
   modeStore.mode === "dark"
     ? (modeStore.mode = "light")
     : (modeStore.mode = "dark");
-  modeStore.setMode();
+  modeStore.setMode(modeStore.mode);
+  modeStore.getMode(modeStore.mode);
 };
 </script>
 <template>

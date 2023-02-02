@@ -38,41 +38,61 @@ const filteredTasks = computed(() => {
       <TaskForm />
 
       <div class="main__list">
-        <ul>
+        <ul v-if="filteredTasks.length > 0">
           <Task v-for="task in filteredTasks" :props="task" />
         </ul>
+        <div v-else class="empty-list">
+          <p
+            v-if="
+              filterTaskStatus === 'Completed' || filterTaskStatus === 'Active'
+            "
+          >
+            There are not {{ filterTaskStatus.toLowerCase() }} tasks
+          </p>
+          <p v-else>Your todo is empty</p>
+        </div>
         <div>
           <ListMenu @filter-tasks="setFilter" />
         </div>
       </div>
       <MobileTaskStatusMenu @filter-tasks="setFilter" />
     </main>
+
     <footer>
       <Attribution />
     </footer>
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .app {
   max-width: 85%;
   margin: auto;
-  .main__list {
-    background-color: var(--color-list-background);
+  min-width: 200px;
+  main {
+    margin: 0 0 25rem 0;
+    .main__list {
+      background-color: var(--color-list-background);
 
-    border-radius: 5px;
+      border-radius: 5px;
 
-    margin-top: 1rem;
-    ul {
-      width: 100%;
-      padding: 0;
-      margin: 0;
+      margin-top: 1rem;
+      ul {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+      }
+      .empty-list {
+        color: var(--color-task);
+        border-bottom: 0.8px solid var(--color-completed-task);
+        text-align: center;
+        padding-top: 0.2rem;
+      }
     }
   }
-}
-
-footer {
-  position: absolute;
-  bottom: 0;
+  footer {
+    color: var(--color-completed-task);
+    text-align: center;
+  }
 }
 </style>
