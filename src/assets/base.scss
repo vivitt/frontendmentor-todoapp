@@ -1,24 +1,31 @@
 :root {
   --vt-c-white: #ffffff;
   --vt-c-brigth-blue: hsl(220, 98%, 61%);
-
   --vt-c-black: #181818;
+  //light
+  --very-light-gray: hsl(0, 0%, 98%);
+  --very-light-grayish-blue: hsl(236, 33%, 92%);
+  --light-grayish-blue: hsl(233, 11%, 84%);
+  --dark-grayish-blue: hsl(236, 9%, 61%);
+  --very-dark-grayish-blue: hsl(235, 19%, 35%);
 
-  --vt-c-divider-light-1: hsl(236, 33%, 92%);
-  --vt-c-divider-light-2: hsl(236, 9%, 61%);
-  --vt-c-divider-dark-1: hsl(234, 39%, 85%);
-  --vt-c-divider-dark-2: hsl(234, 11%, 52%);
-
-  --vt-c-text-light-1: hsl(236, 9%, 61%);
-  --vt-c-text-light-2: hsl(236, 33%, 92%);
-  --vt-c-text-dark-1: hsl(234, 39%, 85%);
-  --vt-c-text-dark-2: hsl(233, 14%, 35%);
+  //dark
+  --very-dark-blue: hsl(235, 21%, 11%);
+  --very-dark-desatured-blue: hsl(235, 24%, 19%);
+  --light-grayish-blue: hsl(234, 39%, 85%);
+  --light-grayish-blue-hover: hsl(236, 33%, 92%);
+  --dark-grayish-blue: hsl(234, 11%, 52%);
+  --very-dark-grayish-blue-1: hsl(233, 14%, 35%);
+  --very-dark-grayish-blue-2: hsl(237, 14%, 26%);
 }
 
 /* semantic color variables for this project */
 :root {
-  --color-background: var(--vt-c-white);
-
+  --color-background: var(--very-light-grayish-blue);
+  --color-list-background: var(--very-light-gray);
+  --color-task: var(--very-dark-blue);
+  --color-completed-task: var(--light-grayish-blue);
+  --color-menu: var(--dark-grayish-blue);
   --color-border: var(--vt-c-divider-light-2);
   --color-border-hover: var(--vt-c-divider-light-1);
 
@@ -30,8 +37,11 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: var(--vt-c-black);
-
+    --color-background: var(--very-dark-blue);
+    --color-list-background: var(--very-dark-desatured-blue);
+    --color-task: var(--very-light-grayish-blue);
+    --color-completed-task: var(--dark-grayish-blue);
+    --color-menu: var(--dark-grayish-blue);
     --color-border: var(--vt-c-divider-dark-2);
     --color-border-hover: var(--vt-c-divider-dark-1);
 

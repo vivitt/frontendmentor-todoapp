@@ -1,4 +1,4 @@
-@import "./base.css";
+@import "./base.scss";
 
 #app {
   max-width: 1280px;
@@ -29,4 +29,8 @@ a {
     background-repeat: no-repeat;
     background-size: contain;
   }
+}
+
+.active {
+  color: var(--vt-c-brigth-blue);
 }

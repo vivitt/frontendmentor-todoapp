@@ -6,21 +6,12 @@ import ListHeader from "./components/ListHeader.vue";
 import { storeToRefs } from "pinia";
 import ListMenu from "./components/ListMenu.vue";
 import Attribution from "./components/Attribution.vue";
+import TaskForm from "./components/TaskForm.vue";
+import MobileTaskStatusMenu from "./components/MobileTaskStatusMenu.vue";
 
 const listStore = useListStore();
 
 const { list } = storeToRefs(listStore);
-
-let newTodo = ref<string>("");
-
-const addTodo = () => {
-  listStore.addTask({
-    task: newTodo.value,
-    id: Date.now(),
-    done: false,
-  });
-  newTodo.value = "";
-};
 
 let filterTaskStatus = ref<string>("all");
 
@@ -44,15 +35,8 @@ const filteredTasks = computed(() => {
       <ListHeader />
     </header>
     <main>
-      <div class="main__input">
-        <form @submit.prevent="addTodo">
-          <input
-            type="text"
-            placeholder="Create a new todo..."
-            v-model="newTodo"
-          />
-        </form>
-      </div>
+      <TaskForm />
+
       <div class="main__list">
         <ul>
           <Task v-for="task in filteredTasks" :props="task" />
@@ -61,6 +45,7 @@ const filteredTasks = computed(() => {
           <ListMenu @filter-tasks="setFilter" />
         </div>
       </div>
+      <MobileTaskStatusMenu @filter-tasks="setFilter" />
     </main>
     <footer>
       <Attribution />
@@ -68,11 +53,24 @@ const filteredTasks = computed(() => {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .app {
-  max-width: 60%;
+  max-width: 85%;
   margin: auto;
+  .main__list {
+    background-color: var(--color-list-background);
+
+    border-radius: 5px;
+
+    margin-top: 1rem;
+    ul {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+  }
 }
+
 footer {
   position: absolute;
   bottom: 0;

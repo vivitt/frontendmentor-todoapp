@@ -15,16 +15,17 @@ const switchMode = () => {
     <div class="header__button">
       <button @click="switchMode">
         <img
+          width="17"
           v-if="modeStore.mode === 'dark'"
           src="../components/icons/icon-sun.svg"
         />
-        <img v-else src="../components/icons/icon-moon.svg" />
+        <img width="17" v-else src="../components/icons/icon-moon.svg" />
       </button>
     </div>
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .header {
   width: 100%;
   display: flex;
@@ -32,6 +33,11 @@ const switchMode = () => {
   justify-content: space-between;
   align-items: center;
   color: var(--vt-c-white);
+  &__title {
+    font-size: 1.3rem;
+    letter-spacing: 0.3rem;
+    margin-bottom: 1.2rem;
+  }
 }
 button {
   all: unset;

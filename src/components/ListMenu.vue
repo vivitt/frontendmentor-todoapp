@@ -16,7 +16,7 @@ const filtersForTasksStatus = ["All", "Active", "Completed"];
 
 <template>
   <div class="bottom">
-    <span>
+    <span class="items-lefts">
       <p>
         {{ list.filter((task: ITask) => task.done === false).length }}
         items left
@@ -41,7 +41,7 @@ const filtersForTasksStatus = ["All", "Active", "Completed"];
         </li>
       </ul>
     </span>
-    <span>
+    <span class="clear-completed">
       <button @click="clearCompleted">
         <a>Clear Completed</a>
       </button></span
@@ -49,31 +49,38 @@ const filtersForTasksStatus = ["All", "Active", "Completed"];
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .bottom {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
   font-size: 0.8rem;
-}
+  color: var(--color-menu);
+  padding: 0 1rem;
+  font-weight: 500;
 
-.bottom__menu ul {
-  display: flex;
-  flex-flow: row nowrap;
-}
-.bottom__menu li {
-  list-style-type: none;
-}
-.bottom__menu a {
-  padding: 0 0.5rem;
-  cursor: pointer;
-}
-button {
-  all: unset;
-  cursor: pointer;
-}
-.active {
-  color: var(--vt-c-brigth-blue);
+  max-width: 100%;
+
+  &__menu {
+    ul {
+      display: flex;
+      flex-flow: row nowrap;
+      li {
+        list-style-type: none;
+        a {
+          padding: 0 0.5rem;
+          cursor: pointer;
+        }
+      }
+    }
+    @media (max-width: 499px) {
+      display: none;
+    }
+  }
+  button {
+    all: unset;
+    cursor: pointer;
+  }
 }
 </style>
