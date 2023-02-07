@@ -5,8 +5,8 @@ const switchMode = () => {
   modeStore.mode === "dark"
     ? (modeStore.mode = "light")
     : (modeStore.mode = "dark");
-  modeStore.setMode(modeStore.mode);
-  modeStore.getMode(modeStore.mode);
+  modeStore.setMode();
+  modeStore.getMode();
 };
 </script>
 <template>
@@ -37,6 +37,7 @@ const switchMode = () => {
     font-size: 1.3rem;
     letter-spacing: 0.3rem;
     margin-bottom: 1.2rem;
+    color: var(--color-title);
   }
 }
 button {

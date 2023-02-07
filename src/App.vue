@@ -91,7 +91,7 @@ const filteredTasks = computed(() => {
     }
   }
   footer {
-    color: var(--color-completed-task);
+    color: var(--color-text);
     text-align: center;
   }
 }

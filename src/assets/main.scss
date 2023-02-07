@@ -16,7 +16,7 @@ a {
 
 @media (hover: hover) {
   a:hover {
-    color: hsl(236, 33%, 92%);
+    color: var(--color-task);
   }
 }
 @media (active: active) {

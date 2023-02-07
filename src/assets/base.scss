@@ -34,8 +34,8 @@
   --color-menu: var(--dark-grayish-blue);
   --color-border: var(--vt-c-divider-light-2);
   --color-border-hover: var(--vt-c-divider-light-1);
-
-  --color-text: var(--vt-c-text-light-1);
+  --color-title: var(--very-light-gray);
+  --color-text: var(--dark-grayish-blue);
   --section-gap: 160px;
 
   --bckg-image-mobile: var(--mobile-image-light);
@@ -50,9 +50,9 @@
   --color-menu: var(--dark-grayish-blue);
   --color-border: var(--vt-c-divider-dark-2);
   --color-border-hover: var(--vt-c-divider-dark-1);
-
+  --color-title: var(--very-light-gray);
   --color-heading: var(--vt-c-white);
-  --color-text: var(--vt-c-text-dark-2);
+  --color-text: var(--light-grayish-blue);
 
   --bckg-image-mobile: var(--mobile-image-dark);
   --bckg-image-desktop: var(--desktop-image-dark);
