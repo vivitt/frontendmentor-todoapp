@@ -1,14 +1,17 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useListStore } from "../stores/list";
 import { storeToRefs } from "pinia";
 import type { ITask } from "../stores/list";
 
 const store = useListStore();
 const { list } = storeToRefs(store);
+const { filteredTasks } = storeToRefs(store);
+
 let isActive = ref(0);
 const clearCompleted = () => {
   list.value = list.value.filter((task: ITask) => !task.done);
+  filteredTasks.value = list.value;
 };
 
 const filtersForTasksStatus = ["All", "Active", "Completed"];
@@ -30,7 +33,7 @@ const filtersForTasksStatus = ["All", "Active", "Completed"];
         >
           <a
             @click="
-              $emit('filterTasks', filter);
+              filteredTasks = store.filterTasks(filter);
               isActive = filtersForTasksStatus.indexOf(filter);
             "
             :class="{

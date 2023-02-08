@@ -8,25 +8,12 @@ import ListMenu from "./components/ListMenu.vue";
 import Attribution from "./components/Attribution.vue";
 import TaskForm from "./components/TaskForm.vue";
 import MobileTaskStatusMenu from "./components/MobileTaskStatusMenu.vue";
-
+import draggable from "vuedraggable";
 const listStore = useListStore();
 
 const { list } = storeToRefs(listStore);
-
-let filterTaskStatus = ref<string>("all");
-
-const setFilter = (filter: string) => {
-  filterTaskStatus.value = filter;
-};
-
-const filteredTasks = computed(() => {
-  if (filterTaskStatus.value === "Active") {
-    return [...list.value].filter((task) => task.done === false);
-  } else if (filterTaskStatus.value === "Completed") {
-    return [...list.value].filter((task) => task.done === true);
-  }
-  return [...list.value].filter((task) => task);
-});
+const { filteredTasks } = storeToRefs(listStore);
+const { selectedTaskStatus } = storeToRefs(listStore);
 </script>
 
 <template>
@@ -38,24 +25,35 @@ const filteredTasks = computed(() => {
       <TaskForm />
 
       <div class="main__list">
-        <ul v-if="filteredTasks.length > 0">
-          <Task v-for="task in filteredTasks" :props="task" />
-        </ul>
+        <draggable
+          v-if="filteredTasks.length > 0"
+          v-model="filteredTasks"
+          tag="ul"
+        >
+          <template #item="{ element: task }">
+            <Task :props="task" />
+          </template>
+        </draggable>
+
         <div v-else class="empty-list">
           <p
             v-if="
-              filterTaskStatus === 'Completed' || filterTaskStatus === 'Active'
+              selectedTaskStatus === 'Completed' ||
+              selectedTaskStatus === 'Active'
             "
           >
-            There are not {{ filterTaskStatus.toLowerCase() }} tasks
+            There are not {{ selectedTaskStatus.toLowerCase() }} tasks
           </p>
           <p v-else>Your todo is empty</p>
         </div>
         <div>
-          <ListMenu @filter-tasks="setFilter" />
+          <ListMenu />
         </div>
       </div>
-      <MobileTaskStatusMenu @filter-tasks="setFilter" />
+      <MobileTaskStatusMenu />
+      <div class="dragAndDropMssg">
+        <p>Drag and drop to reorder list</p>
+      </div>
     </main>
 
     <footer>
@@ -88,6 +86,11 @@ const filteredTasks = computed(() => {
         text-align: center;
         padding-top: 0.2rem;
       }
+    }
+    .dragAndDropMssg {
+      color: var(--color-menu);
+      text-align: center;
+      margin-top: 2rem;
     }
   }
   footer {
