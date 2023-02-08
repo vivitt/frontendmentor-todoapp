@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref, computed, reactive } from "vue";
 import Task from "./components/Task.vue";
-import { useListStore, type ITask } from "./stores/list";
+import { useListStore } from "./stores/list";
 import ListHeader from "./components/ListHeader.vue";
 import { storeToRefs } from "pinia";
 import ListMenu from "./components/ListMenu.vue";
@@ -11,7 +10,6 @@ import MobileTaskStatusMenu from "./components/MobileTaskStatusMenu.vue";
 import draggable from "vuedraggable";
 const listStore = useListStore();
 
-const { list } = storeToRefs(listStore);
 const { filteredTasks } = storeToRefs(listStore);
 const { selectedTaskStatus } = storeToRefs(listStore);
 </script>

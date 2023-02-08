@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { useListStore } from "../stores/list";
 import { storeToRefs } from "pinia";
 import type { ITask } from "../stores/list";
